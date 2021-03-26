@@ -2,6 +2,7 @@ $(document).ready(function (){
     var currentDateTime = moment().format("MMMM Do YYYY");
     console.log(currentDateTime);
     var dateDisplay = $("<h5>").text(currentDateTime);
+    // Displays Current Date on Jumbotron
     $(".jumbotron").append(dateDisplay);
     $(".saveBtn").on("click", function(){
         var activity = $(this).siblings(".description").val();
@@ -10,16 +11,32 @@ $(document).ready(function (){
         console.log(hour);
         localStorage.setItem(hour, activity)
     });
+
+// <-- Color Time Blocks -->
+
     function colorCode () {
         var momentHour = moment().hours();
         console.log(momentHour);
         $(".time-block").each(function () {
             var blockHour = parseInt($(this).attr("id").split("-")[1]);
             console.log(blockHour);
+            if (blockHour < momentHour) {
+                $(this).addClass("past");
+            } else if (blockHour === momentHour) {
+                $(this).removeClass("past");
+                $(this).addClass("present");
+            } else {
+                $(this).removeClass("past");
+                $(this).removeClass("present");
+                $(this).addClass("future");
+            }
         
         })
     };
-    setInterval(colorCode, 60000);
+    setInterval(colorCode, 1000);
+
+    // <-- Local Storage -->
+
     $("#hour-9 .description").val(localStorage.getItem("hour-9"));
     $("#hour-10 .description").val(localStorage.getItem("hour-10"));
     $("#hour-11 .description").val(localStorage.getItem("hour-11"));
