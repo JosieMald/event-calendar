@@ -11,7 +11,7 @@ $(document).ready(function (){
         console.log(hour);
         localStorage.setItem(hour, activity)
     });
-
+    colorCode();
 // <-- Color Time Blocks -->
 
     function colorCode () {
@@ -30,10 +30,10 @@ $(document).ready(function (){
                 $(this).removeClass("present");
                 $(this).addClass("future");
             }
-        
         })
+        console.log("refresh");
     };
-    setInterval(colorCode, 1000);
+    setInterval(colorCode, 60000);
 
     // <-- Local Storage -->
 
